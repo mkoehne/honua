@@ -1,0 +1,37 @@
+{
+  "onboard_p1_title": "Honua",
+  "onboard_p1_body1": "Save the world \n\n",
+  "onboard_p1_body2": "Day by day",
+  "onboard_p2_title": "Aufgaben",
+  "onboard_p2_body1": "Erhalte jeden Tag deine persönliche Aufgabe, um wie Welt besser zu machen \n\n",
+  "onboard_p2_body2": "Aktiviere Benachrichtigungen um autmatisch über jede neue Aufgabe informiert zu werden",
+  "onboard_p2_button": "Mitteilungen erlauben",
+  "onboard_p3_title": "Entdecke wie einfach es sein kann",
+  "onboard_p3_body1": "Mit nur einer kleinen Änderung am Tag kannst du großes bewirken \n\n",
+  "onboard_p3_body2": "Die Welt wird es dir danken",
+  "onboard_skip_button": "Überspringen",
+  "onboard_done_button": "Fertig",
+
+  "onboardvideo_text": "Starte jetzt die Reise in ein bessere Leben \n\nSave the planet",
+  "onboardvideo_register": "Registrieren",
+  "onboardvideo_signup": "Anmelden",
+
+  "tab_home": "Home",
+  "tab_places": "Places",
+  "tab_map": "Karte",
+  "tab_discover": "Entdecken",
+  "tab_profile": "Profil",
+
+
+  "settings_appbar": "Einstellungen",
+  "settings_head1": "Allgemein",
+  "settings_notification": "Benachrichtigung",
+  "settings_language": "Sprache",
+  "settings_darktheme": "Dark-Modus",
+  "settings_head2": "Rechtliche Hinweise",
+  "settings_policy": "Datenschutz",
+  "settings_imprint": "Impressum",
+  "settings_codeofconduct": "Verhaltensregeln",
+  "settings_help": "Hilfe & Kontakt",
+  "settings_signout": "Abmelden"
+}
