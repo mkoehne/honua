@@ -2,30 +2,22 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:honua/helpers/app_translations.dart';
-import 'package:honua/pages/register_page.dart';
+import 'package:honua/pages/login_singup_page.dart';
 import 'package:honua/pages/root_page.dart';
 
-import 'home_page.dart';
-
-/// Component UI
 class IntroVideoPage extends StatefulWidget {
   @override
   _IntroVideoPageState createState() => _IntroVideoPageState();
 }
 
-/// Component UI
 class _IntroVideoPageState extends State<IntroVideoPage>
     with TickerProviderStateMixin {
-  /// Declare Animation
   AnimationController animationController;
   var tapLogin = 0;
   var tapSignup = 0;
 
   @override
-
-  /// Declare animation in initState
   void initState() {
-    /// Animation proses duration
     animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300))
           ..addStatusListener((statuss) {
@@ -39,14 +31,12 @@ class _IntroVideoPageState extends State<IntroVideoPage>
     super.initState();
   }
 
-  /// To dispose animation controller
   @override
   void dispose() {
     super.dispose();
     animationController.dispose();
   }
 
-  /// Play animation set forward reverse
   Future<Null> _Playanimation() async {
     try {
       await animationController.forward();
@@ -54,7 +44,6 @@ class _IntroVideoPageState extends State<IntroVideoPage>
     } on TickerCanceled {}
   }
 
-  /// Component Widget layout UI
   @override
   Widget build(BuildContext context) {
     var translator = AppTranslations.of(context);
@@ -67,9 +56,6 @@ class _IntroVideoPageState extends State<IntroVideoPage>
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-          ///
-          /// Set background video
-          ///
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -80,17 +66,6 @@ class _IntroVideoPageState extends State<IntroVideoPage>
           ),
           Container(
             child: Container(
-              /// Set gradient color in image (Click to open code)
-              /*decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                    Color.fromRGBO(0, 0, 0, 0.1),
-                    Color.fromRGBO(0, 0, 0, 0.4)
-                  ],
-                      begin: FractionalOffset.topCenter,
-                      end: FractionalOffset.bottomCenter)),*/
-
-              /// Set component layout
               child: ListView(
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.all(0.0),
@@ -168,8 +143,9 @@ class _IntroVideoPageState extends State<IntroVideoPage>
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (_) => RegisterPage(),
-                          fullscreenDialog: true),
+                          builder: (_) =>
+                              LoginSignUpPage(mode: FormMode.SIGNUP),
+                          fullscreenDialog: false),
                     );
                   },
                   child: Container(
@@ -187,7 +163,8 @@ class _IntroVideoPageState extends State<IntroVideoPage>
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (_) => RootPage(), fullscreenDialog: true),
+                          builder: (_) => LoginSignUpPage(mode: FormMode.LOGIN),
+                          fullscreenDialog: false),
                     );
                   },
                   child: Container(
@@ -217,7 +194,6 @@ class _IntroVideoPageState extends State<IntroVideoPage>
   }
 }
 
-/// Button Custom widget
 class ButtonCustom extends StatelessWidget {
   @override
   String txt;
@@ -266,7 +242,6 @@ class ButtonCustom extends StatelessWidget {
   }
 }
 
-/// Set Animation Login if user click button login
 class AnimationSplashLogin extends StatefulWidget {
   AnimationSplashLogin({Key key, this.animationController})
       : animation = new Tween(
@@ -297,14 +272,14 @@ class AnimationSplashLogin extends StatefulWidget {
   _AnimationSplashLoginState createState() => _AnimationSplashLoginState();
 }
 
-/// Set Animation Login if user click button login
 class _AnimationSplashLoginState extends State<AnimationSplashLogin> {
   @override
   Widget build(BuildContext context) {
     widget.animationController.addListener(() {
       if (widget.animation.isCompleted) {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => RootPage(), fullscreenDialog: true),
+          MaterialPageRoute(
+              builder: (_) => RootPage(), fullscreenDialog: false),
         );
         //hello
       }
@@ -316,7 +291,6 @@ class _AnimationSplashLoginState extends State<AnimationSplashLogin> {
   }
 }
 
-/// Set Animation signup if user click button signup
 class AnimationSplashSignup extends StatefulWidget {
   AnimationSplashSignup({Key key, this.animationController})
       : animation = new Tween(
@@ -347,14 +321,14 @@ class AnimationSplashSignup extends StatefulWidget {
   _AnimationSplashSignupState createState() => _AnimationSplashSignupState();
 }
 
-/// Set Animation signup if user click button signup
 class _AnimationSplashSignupState extends State<AnimationSplashSignup> {
   @override
   Widget build(BuildContext context) {
     widget.animationController.addListener(() {
       if (widget.animation.isCompleted) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => new HomePage()));
+            builder: (BuildContext context) =>
+                new LoginSignUpPage(mode: FormMode.SIGNUP)));
       }
     });
     return AnimatedBuilder(

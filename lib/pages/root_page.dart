@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:honua/helpers/app_translations.dart';
 import 'package:honua/helpers/theme_changer.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key key}) : super(key: key);
@@ -16,6 +17,13 @@ class RootPageState extends State<RootPage> {
   @override
   void initState() {
     super.initState();
+
+    _saveFirstStart();
+  }
+
+  _saveFirstStart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isFirstStart', false);
   }
 
   @override
