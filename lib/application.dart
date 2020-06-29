@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,6 +53,22 @@ class Application {
   static void savePushToken(token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('push_token', token);
+  }
+
+  static void loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var id = await prefs.getString('id');
+
+    if (id.isNotEmpty) {
+      Application.userId = id;
+      Firestore.instance
+          .collection('users')
+          .where('id', isEqualTo: id)
+          .snapshots()
+          .listen((data) => data.documents.forEach((doc) {
+                Application.user = User.fromMap(doc.data);
+              }));
+    }
   }
 }
 

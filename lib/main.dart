@@ -17,6 +17,9 @@ Future<Null> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var index = (prefs.getInt('theme') ?? 0);
   Application.isFirstStart = prefs.getBool('isFirstStart') ?? true;
+  if (Application.isFirstStart == false) {
+    Application.loadUser();
+  }
   if (index == 0) {
     service.SystemChrome.setSystemUIOverlayStyle(service.SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.white10, // navigation bar color

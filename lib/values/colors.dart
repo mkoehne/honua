@@ -8,7 +8,6 @@
 
 import 'dart:ui';
 
-
 class AppColors {
   static const Color primaryBackground = Color.fromARGB(11, 60, 73, 164);
   static const Color secondaryBackground = Color.fromARGB(77, 211, 228, 246);
