@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:honua/helpers/app_translations.dart';
 import 'package:honua/pages/login_singup_page.dart';
-import 'package:honua/pages/root_page.dart';
+
+import 'home_page.dart';
 
 class IntroVideoPage extends StatefulWidget {
   @override
@@ -279,7 +280,7 @@ class _AnimationSplashLoginState extends State<AnimationSplashLogin> {
       if (widget.animation.isCompleted) {
         Navigator.of(context).push(
           MaterialPageRoute(
-              builder: (_) => RootPage(), fullscreenDialog: false),
+              builder: (_) => HomePage(), fullscreenDialog: false),
         );
         //hello
       }

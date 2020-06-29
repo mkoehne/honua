@@ -59,7 +59,7 @@ class Application {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var id = await prefs.getString('id');
 
-    if (id.isNotEmpty) {
+    if (id != null && id.isNotEmpty) {
       Application.userId = id;
       Firestore.instance
           .collection('users')

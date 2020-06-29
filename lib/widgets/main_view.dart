@@ -214,7 +214,7 @@ class MainView extends StatelessWidget {
                                   height: 18,
                                   margin: EdgeInsets.only(top: 15, right: 39),
                                   child: Image.asset(
-                                    "assets/images/green-copy.png",
+                                    "assets/images/plant.png",
                                     fit: BoxFit.none,
                                   ),
                                 ),
@@ -419,7 +419,7 @@ class MainView extends StatelessWidget {
                                             width: 19,
                                             height: 26,
                                             child: Image.asset(
-                                              "assets/images/water-2.png",
+                                              "assets/images/water.png",
                                               fit: BoxFit.none,
                                             ),
                                           ),
@@ -1002,7 +1002,7 @@ class MainView extends StatelessWidget {
             Positioned(
               top: 128,
               child: Image.asset(
-                "assets/images/fire-copy.png",
+                "assets/images/fire.png",
                 fit: BoxFit.none,
               ),
             ),

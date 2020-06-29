@@ -17,16 +17,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    _saveFirstStart();
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (_) => IntroVideoPage(), fullscreenDialog: true),
     );
-  }
-
-  _saveFirstStart() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isFirstStart', false);
   }
 
   Widget _buildImage(String assetName) {
@@ -42,18 +36,36 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    final ThemeData theme = Theme.of(context);
+
     var translator = AppTranslations.of(context);
-    const bodyStyle = TextStyle(fontSize: 19.0);
-    const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
-      bodyTextStyle: TextStyle(fontSize: 16.0),
+    var bodyStyle = TextStyle(
+      fontSize: 19.0,
+      color: theme.brightness == Brightness.dark ? Colors.black : Colors.white,
+    );
+    var pageDecoration = PageDecoration(
+      titleTextStyle: TextStyle(
+        fontSize: 28.0,
+        fontWeight: FontWeight.w700,
+        color:
+            theme.brightness == Brightness.dark ? Colors.black : Colors.white,
+      ),
+      bodyTextStyle: TextStyle(
+        fontSize: 16.0,
+        color:
+            theme.brightness == Brightness.dark ? Colors.black : Colors.white,
+      ),
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
+      pageColor:
+          theme.brightness == Brightness.dark ? Colors.white : Colors.black,
       imagePadding: EdgeInsets.zero,
     );
 
     return IntroductionScreen(
       key: introKey,
+      globalBackgroundColor:
+          theme.brightness == Brightness.dark ? Colors.white : Colors.black,
       pages: [
         PageViewModel(
           title: translator.text("onboard_p1_title"),
@@ -73,7 +85,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             },
             child: Text(
               translator.text("onboard_p2_button"),
-              style: TextStyle(color: Colors.white),
             ),
             color: Colors.blue,
             shape: RoundedRectangleBorder(
@@ -97,15 +108,23 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       nextFlex: 0,
       skip: Text(
         translator.text("onboard_skip_button"),
-        style: TextStyle(color: Colors.black54),
+        style: TextStyle(
+            color: theme.brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white),
       ),
       next: const Icon(Icons.keyboard_arrow_right),
       done: Text(translator.text("onboard_done_button"),
-          style: TextStyle(fontWeight: FontWeight.w600)),
-      dotsDecorator: const DotsDecorator(
+          style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: theme.brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.white)),
+      dotsDecorator: DotsDecorator(
         size: Size(10.0, 10.0),
-        color: Colors.black12,
-        activeColor: Colors.grey,
+        color:
+            theme.brightness == Brightness.dark ? Colors.black : Colors.white,
+        activeColor: Colors.blue,
         activeSize: Size(10.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),

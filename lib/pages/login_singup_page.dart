@@ -4,11 +4,11 @@ import 'package:honua/application.dart';
 import 'package:honua/helpers/app_translations.dart';
 import 'package:honua/helpers/theme_changer.dart';
 import 'package:honua/models/user.dart';
-import 'package:honua/pages/root_page.dart';
-import 'package:honua/services/authentication.dart';
 import 'package:honua/services/repository.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'home_page.dart';
 
 class LoginSignUpPage extends StatefulWidget {
   LoginSignUpPage({this.mode});
@@ -104,7 +104,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
         if (userId.length > 0 && userId != null) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => RootPage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
             (Route<dynamic> route) => false,
           );
         }
@@ -193,6 +193,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     switch (_formMode) {
       case FormMode.LOGIN:
         return new Container(
+            color: Colors.black,
             padding: EdgeInsets.all(5.0),
             child: new Form(
               key: _formKey,

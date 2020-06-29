@@ -3,12 +3,12 @@ import 'package:honua/helpers/app_translations_delegate.dart';
 import 'package:honua/helpers/theme.dart';
 import 'package:honua/helpers/theme_changer.dart';
 import 'package:honua/pages/onboarding_page.dart';
-import 'package:honua/pages/root_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../application.dart';
+import 'home_page.dart';
 
 class MaterialAppWithTheme extends StatefulWidget {
   @override
@@ -22,8 +22,6 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
 
   @override
   void initState() {
-    _loadFirstStart();
-
     super.initState();
     _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
     Application().onLocaleChanged = onLocaleChange;
@@ -48,16 +46,15 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
         const Locale("de", ""),
         const Locale("en", ""),
       ],
-      theme: buildThemeData(theme.getAppTheme()),
-      home: Application.isFirstStart ? OnBoardingPage() : RootPage(),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+      ),
+      darkTheme:
+          ThemeData(brightness: Brightness.dark, primarySwatch: Colors.blue),
+      //theme: buildThemeData(theme.getAppTheme()),
+      home: Application.isFirstStart ? OnBoardingPage() : HomePage(),
     );
-  }
-
-  _loadFirstStart() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isFirstStart = prefs.getBool('isFirstStart') ?? true;
-    });
   }
 
   void onLocaleChange(Locale locale) {
