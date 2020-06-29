@@ -35,6 +35,7 @@ class Application {
     "de",
   ];
 
+  static bool isFirstStart;
   static String userId;
   static String pushToken;
   static User user;

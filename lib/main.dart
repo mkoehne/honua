@@ -16,7 +16,7 @@ Future<Null> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var index = (prefs.getInt('theme') ?? 0);
-
+  Application.isFirstStart = prefs.getBool('isFirstStart') ?? true;
   if (index == 0) {
     service.SystemChrome.setSystemUIOverlayStyle(service.SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.white10, // navigation bar color

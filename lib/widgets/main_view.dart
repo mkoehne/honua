@@ -1,36 +1,15 @@
+/*
+*  iphone_xscopy7_widget.dart
+*  Honua
+*
+*  Created by .
+*  Copyright © 2018 . All rights reserved.
+    */
+
 import 'package:flutter/material.dart';
-import 'package:honua/helpers/app_translations.dart';
-import 'package:honua/helpers/theme_changer.dart';
-import 'package:honua/values/borders.dart';
-import 'package:honua/values/colors.dart';
-import 'package:honua/values/gradients.dart';
-import 'package:honua/values/radii.dart';
-import 'package:honua/widgets/main_view.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:honua/values/values.dart';
 
-class RootPage extends StatefulWidget {
-  RootPage({Key key}) : super(key: key);
-
-  @override
-  RootPageState createState() {
-    return new RootPageState();
-  }
-}
-
-class RootPageState extends State<RootPage> {
-  @override
-  void initState() {
-    super.initState();
-
-    _saveFirstStart();
-  }
-
-  _saveFirstStart() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isFirstStart', false);
-  }
-
+class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +45,7 @@ class RootPageState extends State<RootPage> {
                               decoration: BoxDecoration(
                                 color: AppColors.ternaryBackground,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(20)),
                               ),
                               child: Container(),
                             ),
@@ -88,7 +67,7 @@ class RootPageState extends State<RootPage> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.stretch,
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Align(
                                         alignment: Alignment.topLeft,
@@ -137,7 +116,7 @@ class RootPageState extends State<RootPage> {
                                 margin: EdgeInsets.only(top: 11),
                                 child: Row(
                                   crossAxisAlignment:
-                                  CrossAxisAlignment.stretch,
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -165,22 +144,22 @@ class RootPageState extends State<RootPage> {
                                               left: 27, right: 15),
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               Align(
                                                 alignment: Alignment.topLeft,
                                                 child: Container(
                                                   margin:
-                                                  EdgeInsets.only(left: 6),
+                                                      EdgeInsets.only(left: 6),
                                                   child: Text(
                                                     "Total",
                                                     textAlign: TextAlign.left,
                                                     style: TextStyle(
                                                       color:
-                                                      AppColors.primaryText,
+                                                          AppColors.primaryText,
                                                       fontFamily: "Open Sans",
                                                       fontWeight:
-                                                      FontWeight.w400,
+                                                          FontWeight.w400,
                                                       fontSize: 12,
                                                     ),
                                                   ),
@@ -199,9 +178,9 @@ class RootPageState extends State<RootPage> {
                                                       color: AppColors
                                                           .primaryElement,
                                                       borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              5)),
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5)),
                                                     ),
                                                     child: Container(),
                                                   ),
@@ -243,10 +222,10 @@ class RootPageState extends State<RootPage> {
                               Container(
                                 height: 60,
                                 margin:
-                                EdgeInsets.only(left: 4, top: 1, right: 19),
+                                    EdgeInsets.only(left: 4, top: 1, right: 19),
                                 child: Row(
                                   crossAxisAlignment:
-                                  CrossAxisAlignment.stretch,
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -274,7 +253,7 @@ class RootPageState extends State<RootPage> {
                                         ),
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                              CrossAxisAlignment.end,
                                           children: [
                                             Container(
                                               width: 29,
@@ -295,10 +274,10 @@ class RootPageState extends State<RootPage> {
                               Container(
                                 height: 22,
                                 margin:
-                                EdgeInsets.only(left: 7, top: 9, right: 24),
+                                    EdgeInsets.only(left: 7, top: 9, right: 24),
                                 child: Row(
                                   crossAxisAlignment:
-                                  CrossAxisAlignment.stretch,
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     Align(
                                       alignment: Alignment.topLeft,
@@ -356,7 +335,7 @@ class RootPageState extends State<RootPage> {
                             decoration: BoxDecoration(
                               gradient: Gradients.primaryGradient,
                               borderRadius:
-                              BorderRadius.all(Radius.circular(5)),
+                                  BorderRadius.all(Radius.circular(5)),
                             ),
                             child: Container(),
                           ),
@@ -411,7 +390,7 @@ class RootPageState extends State<RootPage> {
                               decoration: BoxDecoration(
                                 color: AppColors.primaryBackground,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(22)),
+                                    BorderRadius.all(Radius.circular(22)),
                               ),
                               child: Container(),
                             ),
@@ -432,7 +411,7 @@ class RootPageState extends State<RootPage> {
                                     margin: EdgeInsets.only(left: 33),
                                     child: Row(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                          CrossAxisAlignment.stretch,
                                       children: [
                                         Align(
                                           alignment: Alignment.topLeft,
@@ -484,15 +463,15 @@ class RootPageState extends State<RootPage> {
                                   decoration: BoxDecoration(
                                     color: AppColors.secondaryBackground,
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(14)),
+                                        BorderRadius.all(Radius.circular(14)),
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         margin:
-                                        EdgeInsets.only(left: 28, top: 15),
+                                            EdgeInsets.only(left: 28, top: 15),
                                         child: Text(
                                           "Wash your hands",
                                           textAlign: TextAlign.left,
@@ -540,14 +519,14 @@ class RootPageState extends State<RootPage> {
                                   bottom: -1,
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.stretch,
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       Container(
                                         height: 11,
                                         margin: EdgeInsets.only(right: 6),
                                         child: Row(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                              CrossAxisAlignment.stretch,
                                           children: [
                                             Align(
                                               alignment: Alignment.topLeft,
@@ -580,10 +559,10 @@ class RootPageState extends State<RootPage> {
                                         flex: 1,
                                         child: Container(
                                           margin:
-                                          EdgeInsets.only(left: 2, top: 10),
+                                              EdgeInsets.only(left: 2, top: 10),
                                           child: Row(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
+                                                CrossAxisAlignment.stretch,
                                             children: [
                                               Align(
                                                 alignment: Alignment.bottomLeft,
@@ -604,7 +583,7 @@ class RootPageState extends State<RootPage> {
                                                   width: 8,
                                                   height: 8,
                                                   margin:
-                                                  EdgeInsets.only(left: 2),
+                                                      EdgeInsets.only(left: 2),
                                                   child: Image.asset(
                                                     "assets/images/particle-03.png",
                                                     fit: BoxFit.none,
@@ -696,12 +675,12 @@ class RootPageState extends State<RootPage> {
                                                 bottom: 63,
                                                 child: Row(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .stretch,
+                                                      CrossAxisAlignment
+                                                          .stretch,
                                                   children: [
                                                     Align(
                                                       alignment:
-                                                      Alignment.bottomLeft,
+                                                          Alignment.bottomLeft,
                                                       child: Container(
                                                         width: 9,
                                                         height: 7,
@@ -716,7 +695,7 @@ class RootPageState extends State<RootPage> {
                                                     Spacer(),
                                                     Align(
                                                       alignment:
-                                                      Alignment.bottomLeft,
+                                                          Alignment.bottomLeft,
                                                       child: Container(
                                                         width: 9,
                                                         height: 7,
@@ -734,7 +713,7 @@ class RootPageState extends State<RootPage> {
                                                 bottom: 7,
                                                 child: Stack(
                                                   alignment:
-                                                  Alignment.centerLeft,
+                                                      Alignment.centerLeft,
                                                   children: [
                                                     Positioned(
                                                       top: 7,
@@ -776,12 +755,12 @@ class RootPageState extends State<RootPage> {
                                                 bottom: 0,
                                                 child: Row(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .stretch,
+                                                      CrossAxisAlignment
+                                                          .stretch,
                                                   children: [
                                                     Align(
                                                       alignment:
-                                                      Alignment.bottomLeft,
+                                                          Alignment.bottomLeft,
                                                       child: Container(
                                                         width: 9,
                                                         height: 7,
@@ -796,7 +775,7 @@ class RootPageState extends State<RootPage> {
                                                     Spacer(),
                                                     Align(
                                                       alignment:
-                                                      Alignment.bottomLeft,
+                                                          Alignment.bottomLeft,
                                                       child: Container(
                                                         width: 9,
                                                         height: 7,
@@ -844,7 +823,7 @@ class RootPageState extends State<RootPage> {
                                     width: 9,
                                     height: 7,
                                     margin:
-                                    EdgeInsets.only(right: 4, bottom: 7),
+                                        EdgeInsets.only(right: 4, bottom: 7),
                                     child: Image.asset(
                                       "assets/images/kisspng-dart-programming-language-flutter-object-oriented-flutter-logo-5b454ed3d65b91767530171531268819878-copy-3.png",
                                       fit: BoxFit.none,

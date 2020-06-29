@@ -9,7 +9,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../application.dart';
-import 'home_page.dart';
 
 class MaterialAppWithTheme extends StatefulWidget {
   @override
@@ -23,11 +22,12 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
 
   @override
   void initState() {
+    _loadFirstStart();
+
     super.initState();
     _newLocaleDelegate = AppTranslationsDelegate(newLocale: null);
     Application().onLocaleChanged = onLocaleChange;
     _loadLocale();
-    _loadFirstStart();
   }
 
   @override
@@ -49,7 +49,7 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
         const Locale("en", ""),
       ],
       theme: buildThemeData(theme.getAppTheme()),
-      home: isFirstStart ? OnBoardingPage() : RootPage(),
+      home: Application.isFirstStart ? OnBoardingPage() : RootPage(),
     );
   }
 
@@ -68,7 +68,7 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
 
   _loadLocale() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var locale = (prefs.getString('locale') ?? "de");
+    var locale = (prefs.getString('locale') ?? "en");
     Application().onLocaleChanged(Locale(locale));
   }
 }

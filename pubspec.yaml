@@ -58,8 +58,23 @@ flutter:
     - assets/localization/
     - assets/onboarding/
     - assets/honua.png
+    - assets/fonts/
+    - assets/images/
+    - assets/images/3.0x/
+    - assets/images/2.0x/
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/icon.png"
+
+fonts:
+    - family: Open Sans
+      fonts:
+        - asset: assets/fonts/OpenSans-Semibold.ttf
+          weight: 600
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Light.ttf
+          weight: 300
