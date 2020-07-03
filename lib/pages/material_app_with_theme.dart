@@ -50,8 +50,6 @@ class _MaterialAppWithThemeState extends State<MaterialAppWithTheme> {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      darkTheme:
-          ThemeData(brightness: Brightness.dark, primarySwatch: Colors.blue),
       //theme: buildThemeData(theme.getAppTheme()),
       home: Application.isFirstStart ? OnBoardingPage() : HomePage(),
     );

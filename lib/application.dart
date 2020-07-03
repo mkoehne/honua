@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/user.dart';
@@ -36,6 +37,7 @@ class Application {
     "de",
   ];
 
+  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   static bool isFirstStart;
   static String userId;
   static String pushToken;

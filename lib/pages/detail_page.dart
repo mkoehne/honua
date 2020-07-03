@@ -1,124 +1,31 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:honua/helpers/hex_color.dart';
 import 'package:honua/models/challange.dart';
-import 'package:honua/pages/detail_page.dart';
-import 'package:honua/services/repository.dart';
 import 'package:honua/values/colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import '../application.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+class DetailPage extends StatefulWidget {
+  DetailPage({Key key, this.challenge}) : super(key: key);
+
+  final Challenge challenge;
 
   @override
-  HomePageState createState() {
-    return new HomePageState();
+  DetailPageState createState() {
+    return new DetailPageState(challenge: challenge);
   }
 }
 
-class HomePageState extends State<HomePage> {
-  List<Challenge> challenges = new List<Challenge>();
+class DetailPageState extends State<DetailPage> {
+  DetailPageState({Key key, @required this.challenge});
+  Challenge challenge;
 
   @override
   void initState() {
     super.initState();
-    initPush();
-
-    _saveFirstStart();
-    getChallenges();
-  }
-
-  void initPush() async {
-// initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('launcher_icon');
-    var initializationSettingsIOS = IOSInitializationSettings(
-        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
-    var initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    await Application.flutterLocalNotificationsPlugin.initialize(
-        initializationSettings,
-        onSelectNotification: selectNotification);
-  }
-
-  Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    // display a dialog with the notification details, tap ok to go to another page
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(title),
-        content: Text(body),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            child: Text('Ok'),
-            onPressed: () async {
-              Navigator.of(context, rootNavigator: true).pop();
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (_, __, ___) => DetailPage(
-                    challenge: challenges[0],
-                  ),
-                  transitionDuration: Duration(seconds: 0),
-                ),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  Future selectNotification(String payload) async {
-    if (payload != null) {
-      debugPrint('notification payload: ' + payload);
-    }
-
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => DetailPage(
-          challenge: challenges[0],
-        ),
-        transitionDuration: Duration(seconds: 0),
-      ),
-    );
-  }
-
-  getChallenges() async {
-    var list = await Repository.internal().getChallenges();
-
-    setState(() {
-      challenges = list;
-    });
-
-    var scheduledNotificationDateTime =
-        DateTime.now().add(Duration(seconds: 20));
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'your other channel id',
-        'your other channel name',
-        'your other channel description');
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    NotificationDetails platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await Application.flutterLocalNotificationsPlugin.schedule(
-        0,
-        challenges[0].title,
-        challenges[0].description,
-        scheduledNotificationDateTime,
-        platformChannelSpecifics);
-  }
-
-  _saveFirstStart() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isFirstStart', false);
   }
 
   @override
@@ -153,15 +60,75 @@ class HomePageState extends State<HomePage> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.65,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.all(10.0),
-                itemBuilder: (context, index) =>
-                    buildChallenge(context, challenges[index]),
-                itemCount: challenges.length,
+            child: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.65,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.secondaryBackground,
+                    borderRadius: BorderRadius.all(Radius.circular(14)),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 120,
+                        child: Image.asset(
+                          "assets/images/switch.png",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                                  child: Text(
+                                    challenge.title,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: "Open Sans",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                                  child: Text(
+                                    challenge.description,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: "Open Sans",
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: CachedNetworkImage(
+                          imageUrl: challenge.image,
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -176,6 +143,16 @@ class HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
+          ),
+          Spacer(),
           Text(
             "${Application.user.firstname} ${Application.user.lastname}",
             textAlign: TextAlign.left,
@@ -463,17 +440,7 @@ class HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 10.0, 0.0),
       child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (_, __, ___) => DetailPage(
-                challenge: challenge,
-              ),
-              transitionDuration: Duration(seconds: 0),
-            ),
-          );
-        },
+        onTap: () {},
         child: Container(
           height: 80,
           decoration: BoxDecoration(

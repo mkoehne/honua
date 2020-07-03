@@ -193,7 +193,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     switch (_formMode) {
       case FormMode.LOGIN:
         return new Container(
-            color: Colors.black,
+            color: Colors.white,
             padding: EdgeInsets.all(5.0),
             child: new Form(
               key: _formKey,
