@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:honua/helpers/hex_color.dart';
 import 'package:honua/models/challange.dart';
 import 'package:honua/values/colors.dart';
@@ -118,14 +119,21 @@ class DetailPageState extends State<DetailPage> {
                         ],
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: CachedNetworkImage(
-                          imageUrl: challenge.image,
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                      ),
+                          height: MediaQuery.of(context).size.height * 0.4,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: FullScreenWidget(
+                            child: Hero(
+                              tag: "customTag",
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: CachedNetworkImage(
+                                  imageUrl: challenge.image,
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
+                              ),
+                            ),
+                          )),
                     ],
                   ),
                 ),
